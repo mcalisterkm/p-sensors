@@ -1,4 +1,3 @@
-ªª
 This module supports the BME68X sensor as a Python class.
 Import the module via `<import bme68x>` or import the class via `<from bme68x import BME68X>`
 - To use the BME68X API constants, import bme68xConstants.py via `<import bme68xConstants.py as cnst>` 
@@ -10,52 +9,50 @@ To understand more on this type of cPython integration visit [Real Python]
 and  [Python Documentation]
 (https://docs.python.org/3/c-api/index.html)
 
-
 <H1>Constructor</H1>
-BME68X(i2c_addr (int), use_bsec (int))
+
+`BME68X(i2c_addr (int), use_bsec (int))`
 - Create and initialize new BME68X sensor object, initialize I2C interface
 - Args:
     - i2c_addr (int): I2C address of the BME68X sensor (execute <i2cdetect -y 1> in terminal to look up the i2c address, either 0x76 or 0x77)
-    - use_bsec (int): Enable/disable use of BSEC library (enable = 1 disable = 0, see bsecConstants.py)
+    - use_bsec (int): Changed to debug/no debug -  Set as 0
 - Returns:
     - 0 for success
     - non 0 for failure
-    
-_***I do not think use_bsec has the meaning of BSEC enable/disable in the 1.3 version. Set it to 0 - KMcA***_
 
 <H1>Methods</H1>
 
-init_bme68x()
+`init_bme68x()`
 - initialises the sensor
-_The constructor does this and more - see above. KMcA_
+_The constructor does this and more - see above. _
 print_dur_prof()
 - Walks the duration profile array and prints it (to the tty)
 
-enable_debug_mode()
+`enable_debug_mode()`
 - Enable debug [ sets debug_mode=1 ]
 - Args: None
 
-disable_debug_mode()
+`disable_debug_mode()`
 - Disable debug [sets debug_mode=0 ]
 - Args: None
 
-get_sensor_id()
+`get_sensor_id()`
 - Returns the unique sensor ID or null
 - Args: None
 
-get_chip_id()
+`get_chip_id()`
 - Returns the device chip ID or null
 - Args: None
 
 
-close_i2c()
+`close_i2c()`
 - Close the I2C port
 - Args: None
 - Returns:
   - 0 for success
   - < 0 for error
 
-open_i2c(i2c_addr (int))
+`open_i2c(i2c_addr (int))`
 - Open the I2C port and establish connection to i2c_addr
 - Args:
   - i2c_addr (int): I2C address
@@ -63,9 +60,9 @@ open_i2c(i2c_addr (int))
   - 0 for success
   - throws Error otherwise
 
-_I2C Port/Bus 0 and Port/Bus 1 are defined in BME68x and Bus 1 is the default (/dev/i2c-1). I2C Bus 3 and 4 can be enabled on a PI but would require BME68x code enhancement. Note: I2C Bus 0 and 2 are reserved for internal use on the PI. - KMcA_
+I2C Port/Bus 0 and Port/Bus 1 are defined in BME68x and Bus 1 is the default (/dev/i2c-1). I2C Bus 3 and 4 can be enabled on a PI but would require BME68x code enhancement. Note: I2C Bus 0 and 2 are reserved for internal use on the PI.
 
-get_variant()
+`get_variant()`
 - Get the Sensor variant
 - Args: None
 - Returns
@@ -73,7 +70,7 @@ get_variant()
   - "BME688" in case of BME688
   - "UNKOWN" otherwise
 
-set_temp_offset(t_offs (int))
+`set_temp_offset(t_offs (int))`
 - Set the temperature offset to be subtracted from 25 degC
 - Args:
     - t_offs (int): offset in degC
@@ -84,7 +81,7 @@ set_temp_offset(t_offs (int))
 The developer will need to calibrate this based on the planned mode of operation (ULP, LP, HP). 
 If you have no baseline to compare to your sensor, search online for your local METAR station for an accurate data set covering temperature, pressure, humidity, etc.</p>
 
-set_conf(os_hum (int), os_press (int), os_temp (int), filter (int), odr (int))
+`set_conf(os_hum (int), os_press (int), os_temp (int), filter (int), odr (int))`
 - Configure the oversampling rates for humidity pressure and temperature and set the filter and odr settings of the BME68X sensor
 - Args:
     - os_hum (int): Oversampling rate for humidity
@@ -101,7 +98,7 @@ _Filter settings pass pressure and temperature data through the IIR filter, whic
 The algorithm is `((<last val>) * (C -1) + <Curr Val>)/C `
 The coefficient C is one of 0, 1, 3, 7, 15, 31, 63, 127._ 
 
-set_heatr_conf(enable (int), temperature_profile ([int]), duration_profile ([int]), operation_mode (int))
+`set_heatr_conf(enable (int), temperature_profile ([int]), duration_profile ([int]), operation_mode (int))`
 - Configure the heater
 - Args:
     - enable (int): Enable/disable gas measurement (BME68X_ENABLE to enable, BME68X_DISABLE to disable)
@@ -112,7 +109,7 @@ set_heatr_conf(enable (int), temperature_profile ([int]), duration_profile ([int
     - 0 for success
     - non 0 for failure
  
-set_sample_rate(float)
+`set_sample_rate(float)`
 - Sets the sampling rate for all virtual sensors
 - Args: One of the following
   - BSEC_SAMPLE_RATE_ULP <p> ULP has a drain of \< 0.1 mA and an update rate of 300 sec </p>
@@ -136,13 +133,13 @@ The sample rate, and heater configuration impact the duration of the sleep whils
 There is no point in hammering get_data()/bsec_get_data() in a tight loop. 
 However, also  do not leave it too long. For example: when running the sensor
 in low-power mode the intended sample period is ~3 s (.19 + 2.8), and the difference between two consecutive
-measurements must not exeed 150% of 3 s which is 4.5 s (or expect 0 values to be returned).
+measurements must not exceed 150% of 3 s which is 4.5 s (or expect 0 values to be returned).
 For ULP Mode the intended sample period is 300 sec, so do not exceed 450sec.</p>
 
 <p>The v1.3 examples typically have a get data loop testing for "null" return, seeing lots of "nulls" means the sensor was not ready.
 Adjust your sleep() accordingly. </p>
 
-get_data()
+`get_data()`
 - Measure data under current configuration
 - Returns:
     - list of physical measurement values, without use of BSEC (in FORCED MODE)
@@ -155,7 +152,7 @@ get_data()
     - gas_resistance (double) in kOhm (kilo Ohm)
     - status (int)
     
-get_bsec_data()
+`get_bsec_data()`
 - Measure data under current configuration and process it using BSEC
 - Returns:
     - list of physical and virtual measurement values including IAQ, uses BSEC2.0 (in FORCED MODE)
@@ -180,21 +177,20 @@ get_bsec_data()
     - comp_gas_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
     - gas_percentage (double) 
     - gas_percentage_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
-- **__Requires use_bsec to be set to BSEC_ENABLE_ -- KMcA Is this correct?**_
-- co2_equivalent and breath_voc_equivalent are derived using static_iaq and lab results
-- They assume the sensor is used indoors and that humans are the source of the air pollution.
+    - co2_equivalent and breath_voc_equivalent are derived using static_iaq and lab results
+    - They assume the sensor is used indoors and that humans are the source of the air pollution.
 
-subscribe_gas_estimates()
+`subscribe_gas_estimates()`
 - Args
 - Returns
 Subscribe argument must be int number of gas estimates (0 - 4)
 
-subscribe_ai_classes()
+`subscribe_ai_classes()`
 - Args
 - Returns
 Subscribe to all gas estimates
 
-update_bsec_subscription()
+`update_bsec_subscription()`
 - Args: For each virtual sensor, items must be tuples (sensor_id, sample_rate)
 - Returns: Result
 
@@ -207,7 +203,7 @@ Note: The BOSCH integration guide has a table on page 8, Section 1.2.4 Supported
 The sample rates ULP, LP, HP,HTR and SEL are (1/300, 1/3, 1,1/heater step duration, 1/scan duration) Hz respectively.
 
 
-get_digital_nose_data()
+`get_digital_nose_data()`
 - Args: none
 - Returns: 
 
@@ -216,17 +212,17 @@ These are listed in the virtual sensor table on page 8 of the Integration guide
 as BSEC_OUTPUT_GAS_ESTIMATE_1 to 4
 
 
-get_bsec_version()
+`get_bsec_version()`
 - Args: none
 - Returns: string (major, minor, major_bugfix, minor_bugfix)
 
-get_bsec_conf()
+`get_bsec_conf()`
 - Args : none
 - Returns: gets the BSEC conf and returns it a list of integers.
 
 See get_bsec_state() and set_bsec_state() below, as the approach is similar but the array of Integer values is larger at 2277 (197 for state). 
  
-set_bsec_conf( config ([int]))
+`set_bsec_conf( config ([int]))`
 - Args: config - list of integers
   - Assuming the config is in a file it will need to be read and converted from bytes to int. See the get_data.py example in the pi3g github repository BME688CheeseMeatDetector
 - Returns: 0 success Null on failure
@@ -236,7 +232,7 @@ set_bsec_conf( config ([int]))
 Each Class is based on training from sample data of a smell (meat, coffee, air, cheese, etc) and exported as a single config file.
 Default configs are provided in the BOSCH BSEC library 2.0.6.1, and the Pi3g code is set to import an appropriate config on initialisation. </p>
 
-get_bsec_state()
+`get_bsec_state()`
 - Args: none
 - Returns: Array in Int values (197)
 
@@ -254,7 +250,7 @@ The viewed file looks like this:
 ```
 [1, 6, 0, 2, 189, 1, 0, 0, 0, 0, 0, 0, 173, 0, 0,.......... , 0, 0, 105, 44, 0, 0]
 ```
-set_bsec_state()
+`set_bsec_state()`
 - Args: Array in Int values (197)
 - Returns: 0 on sucess and Null on error
 
@@ -270,13 +266,13 @@ conf_int = [int(x) for x in conf_list]
 Why save the state for later? After sensor burn in the accuracy will likely reach state 3 (High Accuracy), and restoring this state data helps the sensor get back to that accuracy quickly.
 From a cold start of the sensor, setting a known good saved state will not be an instant step to accuracy 3, but it will speed up the journey from state 0 - 3.  
 
-enable_gas_estimates()
+`enable_gas_estimates()`
 - Args: none
 - Returns: 0 on sucess and Null on error
 
 Enable all 4 gas estimates
 
-disable_gas_estimate()
+`disable_gas_estimate()`
 - Args: none
 - Returns: 0 on sucess and Null on error
 
