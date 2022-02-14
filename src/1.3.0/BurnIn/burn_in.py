@@ -7,7 +7,7 @@
 # $ nohup python3 burn_in.py &
 # It is essential to provide bad and clean air during the 24 hours run-in.
 # One successful approach is to put hand sanitiser (~60% ethyl alcohol) on a paper towel by the sensor for at least 30 min.
-# To do: Assumes a conf directory exists, would be better to test and create if it does not.
+# TODO: Assumes a conf directory exists, would be better to test and create if it does not.
 #
 
 from bme68x import BME68X
@@ -15,10 +15,18 @@ import bme68xConstants as cnst
 import bsecConstants as bsec
 from time import sleep, time
 from pathlib import Path
+import os, errno
 
 # Set up patameters.
 temp_prof = [320, 100, 100, 100, 200, 200, 200, 320, 320, 320]
 dur_prof =[5, 2, 10, 30, 5, 5, 5, 5, 5, 5]
+
+# Check for conf directory and create if not present
+try: os.makedirs("conf", mode=0o755, exist_ok = True)
+except OSError as err:
+# Reraise the error unless it's about an already existing directory
+    if err.errno != errno.EEXIST or not os.path.isdir(newdir):
+       raise
 
 # Initialise the bme688 sensor
 #  BME68X_I2C_ADDR_LOW is the pimoroni BME688 I2C default address
@@ -56,7 +64,7 @@ while True:
     #
     print(bsec_data)
     sleep(1)
-    # Run the sensor for 24 hours and check the IAQ qulity is 3 (High Quality)
+    # Run the sensor for 24 hours and check the IAQ qulity is 3 (Best Quality)
     # 24 hours in seconds is 86400
     # If the test succeeds write out the state and config data to files in the conf subdirectory.
     # The config files are written as print(<state>, <file_handle>) - readable strings.

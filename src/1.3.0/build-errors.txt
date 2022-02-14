@@ -1,0 +1,164 @@
+root@raspberrypi:/home/pi/bme68x-python-library-main-1-3# python3 setup.py install
+running install
+running bdist_egg
+running egg_info
+creating bme68x.egg-info
+writing bme68x.egg-info/PKG-INFO
+writing dependency_links to bme68x.egg-info/dependency_links.txt
+writing top-level names to bme68x.egg-info/top_level.txt
+writing manifest file 'bme68x.egg-info/SOURCES.txt'
+reading manifest file 'bme68x.egg-info/SOURCES.txt'
+writing manifest file 'bme68x.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-armv7l/egg
+running install_lib
+running build_py
+creating build
+creating build/lib.linux-armv7l-3.7
+copying bme68xConstants.py -> build/lib.linux-armv7l-3.7
+copying bsecConstants.py -> build/lib.linux-armv7l-3.7
+running build_ext
+building 'bme68x' extension
+creating build/temp.linux-armv7l-3.7
+creating build/temp.linux-armv7l-3.7/BME68x-Sensor-API
+arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -I/usr/local/include -I/usr/include/python3.7m -c bme68xmodule.c -o build/temp.linux-armv7l-3.7/bme68xmodule.o -D BSEC
+bme68xmodule.c:11: warning: "BSEC" redefined
+ #define BSEC
+ 
+<command-line>: note: this is the location of the previous definition
+bme68xmodule.c: In function ‘bme_get_sensor_id’:
+bme68xmodule.c:338:50: warning: passing argument 2 of ‘bme68x_get_regs’ from incompatible pointer type [-Wincompatible-pointer-types]
+     rslt = bme68x_get_regs(BME68X_REG_UNIQUE_ID, &id_regs, len, &(self->bme));
+                                                  ^~~~~~~~
+In file included from internal_functions.h:18,
+                 from bme68xmodule.c:4:
+BME68x-Sensor-API/bme68x.h:122:51: note: expected ‘uint8_t *’ {aka ‘unsigned char *’} but argument is of type ‘uint8_t (*)[4]’ {aka ‘unsigned char (*)[4]’}
+ int8_t bme68x_get_regs(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, struct bme68x_dev *dev);
+                                          ~~~~~~~~~^~~~~~~~
+bme68xmodule.c: In function ‘bme_bsec_process_data’:
+bme68xmodule.c:820:15: warning: unused variable ‘data’ [-Wunused-variable]
+     PyObject *data = PyDict_New();
+               ^~~~
+bme68xmodule.c:818:13: warning: unused variable ‘num_bsec_outputs’ [-Wunused-variable]
+     uint8_t num_bsec_outputs = 0;
+             ^~~~~~~~~~~~~~~~
+bme68xmodule.c:817:19: warning: unused variable ‘bsec_outputs’ [-Wunused-variable]
+     bsec_output_t bsec_outputs[BSEC_NUMBER_OUTPUTS];
+                   ^~~~~~~~~~~~
+bme68xmodule.c:740:18: warning: variable ‘inputs’ set but not used [-Wunused-but-set-variable]
+     bsec_input_t inputs[BSEC_MAX_PHYSICAL_SENSOR];
+                  ^~~~~~
+bme68xmodule.c:821:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+At top level:
+bme68xmodule.c:737:18: warning: ‘bme_bsec_process_data’ defined but not used [-Wunused-function]
+ static PyObject *bme_bsec_process_data(BMEObject *self, bsec_bme_settings_t *sensor_settings, uint8_t i, int64_t time_stamp)
+                  ^~~~~~~~~~~~~~~~~~~~~
+bme68xmodule.c: In function ‘bme_get_bsec_version’:
+bme68xmodule.c:1378:31: warning: ‘%d’ directive writing between 1 and 3 bytes into a region of size between 2 and 8 [-Wformat-overflow=]
+     sprintf(buffer, "%d.%d.%d.%d", version.major, version.minor, version.major_bugfix, version.minor_bugfix);
+                               ^~
+bme68xmodule.c:1378:21: note: directive argument in the range [0, 255]
+     sprintf(buffer, "%d.%d.%d.%d", version.major, version.minor, version.major_bugfix, version.minor_bugfix);
+                     ^~~~~~~~~~~~~
+In file included from /usr/include/stdio.h:873,
+                 from /usr/include/python3.7m/Python.h:25,
+                 from bme68xmodule.c:2:
+/usr/include/arm-linux-gnueabihf/bits/stdio2.h:36:10: note: ‘__builtin___sprintf_chk’ output between 8 and 16 bytes into a destination of size 14
+   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       __bos (__s), __fmt, __va_arg_pack ());
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -I/usr/local/include -I/usr/include/python3.7m -c BME68x-Sensor-API/bme68x.c -o build/temp.linux-armv7l-3.7/BME68x-Sensor-API/bme68x.o -D BSEC
+arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -I/usr/local/include -I/usr/include/python3.7m -c internal_functions.c -o build/temp.linux-armv7l-3.7/internal_functions.o -D BSEC
+internal_functions.c:3: warning: "BSEC" redefined
+ #define BSEC
+ 
+<command-line>: note: this is the location of the previous definition
+internal_functions.c: In function ‘bsec_process_data’:
+internal_functions.c:395:13: warning: variable ‘gas_percentage_accuracy’ set but not used [-Wunused-but-set-variable]
+     uint8_t gas_percentage_accuracy = 0;
+             ^~~~~~~~~~~~~~~~~~~~~~~
+internal_functions.c:394:11: warning: variable ‘gas_percentage’ set but not used [-Wunused-but-set-variable]
+     float gas_percentage = 0.0f;
+           ^~~~~~~~~~~~~~
+internal_functions.c:393:13: warning: variable ‘comp_gas_accuracy’ set but not used [-Wunused-but-set-variable]
+     uint8_t comp_gas_accuracy = 0;
+             ^~~~~~~~~~~~~~~~~
+internal_functions.c:392:11: warning: variable ‘comp_gas_value’ set but not used [-Wunused-but-set-variable]
+     float comp_gas_value = 0.0f;
+           ^~~~~~~~~~~~~~
+internal_functions.c:391:13: warning: variable ‘breath_voc_accuracy’ set but not used [-Wunused-but-set-variable]
+     uint8_t breath_voc_accuracy = 0;
+             ^~~~~~~~~~~~~~~~~~~
+internal_functions.c:390:11: warning: variable ‘breath_voc_equivalent’ set but not used [-Wunused-but-set-variable]
+     float breath_voc_equivalent = 0.0f;
+           ^~~~~~~~~~~~~~~~~~~~~
+internal_functions.c:389:13: warning: variable ‘co2_accuracy’ set but not used -Wunused-but-set-variable]
+     uint8_t co2_accuracy = 0;
+             ^~~~~~~~~~~~
+internal_functions.c:388:11: warning: variable ‘co2_equivalent’ set but not used [-Wunused-but-set-variable]
+     float co2_equivalent = 0.0f;
+           ^~~~~~~~~~~~~~
+internal_functions.c:387:13: warning: variable ‘static_iaq_accuracy’ set but not used [-Wunused-but-set-variable]
+     uint8_t static_iaq_accuracy = 0;
+             ^~~~~~~~~~~~~~~~~~~
+internal_functions.c:386:11: warning: variable ‘static_iaq’ set but not used [-Wunused-but-set-variable]
+     float static_iaq = 0.0f;
+           ^~~~~~~~~~
+internal_functions.c:385:11: warning: variable ‘raw_gas’ set but not used [-Wunused-but-set-variable]
+     float raw_gas = 0.0f;
+           ^~~~~~~
+internal_functions.c:384:11: warning: variable ‘raw_humidity’ set but not used -Wunused-but-set-variable]
+     float raw_humidity = 0.0f;
+           ^~~~~~~~~~~~
+internal_functions.c:383:11: warning: variable ‘humidity’ set but not used [-Wunused-but-set-variable]
+     float humidity = 0.0f;
+           ^~~~~~~~
+internal_functions.c:382:11: warning: variable ‘raw_pressure’ set but not used -Wunused-but-set-variable]
+     float raw_pressure = 0.0f;
+           ^~~~~~~~~~~~
+internal_functions.c:381:11: warning: variable ‘raw_temp’ set but not used [-Wunused-but-set-variable]
+     float raw_temp = 0.0f;
+           ^~~~~~~~
+internal_functions.c:380:11: warning: variable ‘temp’ set but not used [-Wunused-but-set-variable]
+     float temp = 0.0f;
+           ^~~~
+internal_functions.c:379:13: warning: variable ‘iaq_accuracy’ set but not used -Wunused-but-set-variable]
+     uint8_t iaq_accuracy = 0;
+             ^~~~~~~~~~~~
+internal_functions.c:378:11: warning: variable ‘iaq’ set but not used [-Wunused-but-set-variable]
+     float iaq = 0.0f;
+           ^~~
+internal_functions.c:377:13: warning: variable ‘timestamp’ set but not used [-Wunused-but-set-variable]
+     int64_t timestamp = 0;
+             ^~~~~~~~~
+arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.7/bme68xmodule.o build/temp.linux-armv7l-3.7/BME68x-Sensor-API/bme68x.o build/temp.linux-armv7l-3.7/internal_functions.o -L/usr/local/lib -LBSEC_2.0.6.1_Generic_Release_04302021/algo/normal_version/bin/RaspberryPi/PiThree_ArmV6 -lpthread -lm -lrt -lalgobsec -o build/lib.linux-armv7l-3.7/bme68x.cpython-37m-arm-linux-gnueabihf.so
+creating build/bdist.linux-armv7l
+creating build/bdist.linux-armv7l/egg
+copying build/lib.linux-armv7l-3.7/bsecConstants.py -> build/bdist.linux-armv7l/egg
+copying build/lib.linux-armv7l-3.7/bme68x.cpython-37m-arm-linux-gnueabihf.so -> build/bdist.linux-armv7l/egg
+copying build/lib.linux-armv7l-3.7/bme68xConstants.py -> build/bdist.linux-armv7l/egg
+byte-compiling build/bdist.linux-armv7l/egg/bsecConstants.py to bsecConstants.cpython-37.pyc
+byte-compiling build/bdist.linux-armv7l/egg/bme68xConstants.py to bme68xConstants.cpython-37.pyc
+creating stub loader for bme68x.cpython-37m-arm-linux-gnueabihf.so
+byte-compiling build/bdist.linux-armv7l/egg/bme68x.py to bme68x.cpython-37.pyc
+creating build/bdist.linux-armv7l/egg/EGG-INFO
+copying bme68x.egg-info/PKG-INFO -> build/bdist.linux-armv7l/egg/EGG-INFO
+copying bme68x.egg-info/SOURCES.txt -> build/bdist.linux-armv7l/egg/EGG-INFO
+copying bme68x.egg-info/dependency_links.txt -> build/bdist.linux-armv7l/egg/EGG-INFO
+copying bme68x.egg-info/top_level.txt -> build/bdist.linux-armv7l/egg/EGG-INFO
+writing build/bdist.linux-armv7l/egg/EGG-INFO/native_libs.txt
+zip_safe flag not set; analyzing archive contents...
+__pycache__.bme68x.cpython-37: module references __file__
+creating dist
+creating 'dist/bme68x-1.3.0-py3.7-linux-armv7l.egg' and adding 'build/bdist.linux-armv7l/egg' to it
+removing 'build/bdist.linux-armv7l/egg' (and everything under it)
+Processing bme68x-1.3.0-py3.7-linux-armv7l.egg
+creating /usr/local/lib/python3.7/dist-packages/bme68x-1.3.0-py3.7-linux-armv7l.egg
+Extracting bme68x-1.3.0-py3.7-linux-armv7l.egg to /usr/local/lib/python3.7/dist-packages
+Adding bme68x 1.3.0 to easy-install.pth file
+
+Installed /usr/local/lib/python3.7/dist-packages/bme68x-1.3.0-py3.7-linux-armv7l.egg
+Processing dependencies for bme68x==1.3.0
+Finished processing dependencies for bme68x==1.3.0
