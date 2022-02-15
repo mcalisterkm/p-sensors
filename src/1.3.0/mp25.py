@@ -77,6 +77,7 @@ def disp_template_1(pm10_env, pm25_env, pm100_env, note, disp_device1):
         draw.text((5, 26), pm100_env, font=font2, fill="white")
         draw.text((5, 42), note, font=font2, fill="white")
 
+disp_device1 = get_screen1()
 while True:
     time.sleep(30)
 
@@ -106,7 +107,7 @@ while True:
    # print("Particles > 0.3um / 0.1L air:", aqdata["particles 03um"])
    # print("Particles > 0.5um / 0.1L air:", aqdata["particles 05um"])
    #
-    disp_device1 = get_screen1()
+
     if aqdata == None or aqdata == {}:
         sleep(0.1)
     else:
@@ -124,4 +125,5 @@ while True:
         row_data =[(str(time.strftime("%a %b %d %H:%M:%S %Y GMT", time.gmtime()))), aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]
         writer.writerow(row_data)
         pm_log.flush()
-        disp_template_1(pm10_env, pm25_env, pm100_env, note, disp_device1=get_screen1())
+        # disp_template_1(pm10_env, pm25_env, pm100_env, note, disp_device1=get_screen1())
+        disp_template_1(pm10_env, pm25_env, pm100_env, note, disp_device1)

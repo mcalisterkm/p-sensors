@@ -1,8 +1,12 @@
-
+#!/usr/bin/python3
+#
+# This version works with an SPI connected OLED SH1106 screen 128 x 128
+# It uses the luma and pillow library and expects fonts to be in a fonts subdirectory.
+#
 from bme68x import BME68X
 import bme68xConstants as cst
 import bsecConstants as bsec
-from time import sleep
+from time import sleep, time
 from pathlib import Path
 from PIL import ImageFont
 from luma.core.render import canvas
@@ -12,21 +16,8 @@ from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 temp_prof = [320, 100, 100, 100, 200, 200, 200, 320, 320, 320]
 dur_prof =[5, 2, 10, 30, 5, 5, 5, 5, 5, 5]
 
-# print('TESTING FORCED MODE WITHOUT BSEC')
-# bme = BME68X(cst.BME68X_I2C_ADDR_LOW, bsec.BSEC_DISABLE)
-# print(bme.get_variant())
-# print(bme.get_data())
-# sleep(3)
-# print()
-print('SETTING UP BME688 MODE WITH BSEC')
-bme = BME68X(cst.BME68X_I2C_ADDR_HIGH, 0)
-bme.set_sample_rate(bsec.BSEC_SAMPLE_RATE_LP)
-# print(bme.set_heatr_conf(cst.BME68X_ENABLE, temp_prof, dur_prof, cst.BME68X_PARALLEL_MODE))
-print(bme.get_variant())
-# Offset calibrated in C.
-print(bme.set_heatr_conf(cst.BME68X_ENABLE, temp_prof, dur_prof, cst.BME68X_SEQUENTIAL_MODE))
-sleep(0.5)
-print(bme.set_temp_offset(2))
+# Amend this to your state file name
+state_file_name = "state_data1644485092616.txt"
 
 def get_screen1():
     # serial = i2c(port=1, address=0x3C)
@@ -46,6 +37,17 @@ def disp_template_1(avg_temp, avg_humidity, avg_pressure, aiq, co2, gas, disp_de
         draw.text((5, 60), aiq , font=font2, fill="white")
         draw.text((5, 80), co2 , font=font2, fill="white")
         draw.text((5, 100), gas , font=font2, fill="white")
+
+
+def readstate(state_file_name):
+    state_path = str(Path(__file__).resolve().parent.joinpath('conf', state_file_name))
+    state_file = open(state_path, 'r')
+    # strip the brackets [.....]
+    state_str =  state_file.read()[1:-1]
+    # split on delimiter ,
+    state_list = state_str.split(",")
+    state_int = [int(x) for x in state_list]
+    return(state_int)
 
 def get_data(sensor):
     data = {}
@@ -76,6 +78,19 @@ def main():
             co2 = "CO2: " + "{: ^4.1f}".format(data['co2_equivalent'])  + "ppm"
             gas = "Raw Gas: " + "{: ^4.1f}".format(data['raw_gas'])
             disp_template_1(temp, hum, pres, iaq, co2 , gas, disp_device1=get_screen1())
+
+
+print('SETTING UP BME688')
+bme = BME68X(cst.BME68X_I2C_ADDR_HIGH, 0)
+bme.set_sample_rate(bsec.BSEC_SAMPLE_RATE_LP)
+print(bme.get_variant())
+print(bme.set_heatr_conf(cst.BME68X_ENABLE, temp_prof, dur_prof, cst.BME68X_SEQUENTIAL_MODE))
+sleep(0.5)
+state_int = readstate(state_file_name)
+print(bme.set_bsec_state(state_int))
+# Offset calibrated in the BSEC Library.
+print(bme.set_temp_offset(2))
+print("BME688 Config set....")
 
 if __name__ == '__main__':
     try:
