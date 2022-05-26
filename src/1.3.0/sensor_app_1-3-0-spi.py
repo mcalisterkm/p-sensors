@@ -2,6 +2,8 @@
 #
 # This version works with an SPI connected OLED SH1106 screen 128 x 128
 # It uses the luma and pillow library and expects fonts to be in a fonts subdirectory.
+# This code will not run without running the burn_in.py code and getting a saved state file from the 24 hour burn-in.
+# Edit the state_file_name to reference your saved state file.
 #
 from bme68x import BME68X
 import bme68xConstants as cst
@@ -73,11 +75,11 @@ def main():
         else:
             temp = "Temperature: " + "{: ^4.1f}".format(data['temperature']) + " \u00B0"+ "C"
             hum = "Humidity: " +  "{: ^4.1f}".format(data['humidity']) + "%"
-            pres = "Pressure: " + "{: ^4.1f}".format(data['raw_pressure'])  + " hPa"
+            pres = "Pressure: " + "{: ^4.1f}".format((data['raw_pressure'] / 100))  + " hPa" # sensor reports in pascals so /100 for hpa
             iaq =  "IAQ: " +  "{: ^4.1f}".format(data['iaq'])
             co2 = "CO2: " + "{: ^4.1f}".format(data['co2_equivalent'])  + "ppm"
             gas = "Raw Gas: " + "{: ^4.1f}".format(data['raw_gas'])
-            disp_template_1(temp, hum, pres, iaq, co2 , gas, disp_device1=get_screen1())
+            disp_template_1(temp, hum, pres, iaq, co2 , gas, disp_device1)
 
 
 print('SETTING UP BME688')
