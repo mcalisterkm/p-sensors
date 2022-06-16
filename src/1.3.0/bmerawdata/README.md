@@ -1,4 +1,4 @@
-I bmerawdata
+I bmerawdata - this is Pi3G documentation and code.
 ---------------
 
 This tool allows you to record and save data with your [BME688 Breakout Board](https://buyzero.de/products/luftqualitatssensor-bosch-bme688-breakout-board?_pos=2&_sid=985505100&_ss=r), so that it can be imported by [Boschs AI Studio](https://www.bosch-sensortec.com/software-tools/software/bme688-software/).
