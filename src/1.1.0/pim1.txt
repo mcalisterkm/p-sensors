@@ -1,0 +1,52 @@
+TEST W/O BSEC
+
+FORCED MODE TEST
+0
+{'sample_nr': 1, 'timestamp': 3958625, 'temperature': 23.096996307373047, 'pressure': 1020.1937255859375, 'humidity': 43.618011474609375, 'gas_resistance': 36.45868682861328, 'status': 160}
+
+PARALLEL MODE TEST
+0
+[{'sample_nr': 0, 'timestamp': 3959541, 'temperature': 24.590484619140625, 'pressure': 1020.2156982421875, 'humidity': 43.812870025634766, 'gas_resistance': 5.768267631530762, 'gas_index': 0, 'status': 176}, {'sample_nr': 0, 'timestamp': 3959848, 'temperature': 24.63566780090332, 'pressure': 1020.1510009765625, 'humidity': 43.787906646728516, 'gas_resistance': 352.2172546386719, 'gas_index': 1, 'status': 176}, {'sample_nr': 0, 'timestamp': 3961230, 'temperature': 24.86910629272461, 'pressure': 1020.1746215820312, 'humidity': 43.477088928222656, 'gas_resistance': 279.07098388671875, 'gas_index': 2, 'status': 176}, {'sample_nr': 0, 'timestamp': 3965376, 'temperature': 25.135175704956055, 'pressure': 1020.1958618164062, 'humidity': 42.22249221801758, 'gas_resistance': 218.55377197265625, 'gas_index': 3, 'status': 176}, {'sample_nr': 0, 'timestamp': 3966144, 'temperature': 25.308372497558594, 'pressure': 1020.1473388671875, 'humidity': 42.062538146972656, 'gas_resistance': 15.429974555969238, 'gas_index': 4, 'status': 176}, {'sample_nr': 0, 'timestamp': 3966758, 'temperature': 25.499141693115234, 'pressure': 1020.2113037109375, 'humidity': 41.910614013671875, 'gas_resistance': 16.25338363647461, 'gas_index': 5, 'status': 176}, {'sample_nr': 0, 'timestamp': 3967526, 'temperature': 25.6020565032959, 'pressure': 1020.2138061523438, 'humidity': 41.731040954589844, 'gas_resistance': 17.39704132080078, 'gas_index': 6, 'status': 176}, {'sample_nr': 0, 'timestamp': 3968140, 'temperature': 25.62715721130371, 'pressure': 1020.1994018554688, 'humidity': 41.548912048339844, 'gas_resistance': 7.737563610076904, 'gas_index': 7, 'status': 176}, {'sample_nr': 0, 'timestamp': 3968908, 'temperature': 25.790313720703125, 'pressure': 1020.1618041992188, 'humidity': 41.4061393737793, 'gas_resistance': 9.871691703796387, 'gas_index': 8, 'status': 176}, {'sample_nr': 0, 'timestamp': 3969522, 'temperature': 25.905780792236328, 'pressure': 1020.24072265625, 'humidity': 41.23432922363281, 'gas_resistance': 11.152488708496094, 'gas_index': 9, 'status': 176}]
+
+SEQUENTIAL MODE TEST
+0
+[<NULL>, {'sample_nr': 0, 'timestamp': 4150198, 'temperature': 24.173810958862305, 'pressure': 1020.1674194335938, 'humidity': 41.38226318359375, 'gas_resistance': 1048.3243408203125, 'gas_index': 1, 'status': 176}, {'sample_nr': 0, 'timestamp': 4000030, 'temperature': 24.070898056030273, 'pressure': 1020.1364135742188, 'humidity': 41.64455795288086, 'gas_resistance': 599.3114624023438, 'gas_index': 2, 'status': 176}, {'sample_nr': 0, 'timestamp': 4120375, 'temperature': 24.15875244140625, 'pressure': 1020.2259521484375, 'humidity': 41.481685638427734, 'gas_resistance': 762.0396728515625, 'gas_index': 3, 'status': 176}, {'sample_nr': 0, 'timestamp': 4120375, 'temperature': 24.173810958862305, 'pressure': 1020.1952514648438, 'humidity': 41.48333740234375, 'gas_resistance': 68.83372497558594, 'gas_index': 4, 'status': 176}, {'sample_nr': 0, 'timestamp': 4120375, 'temperature': 24.196401596069336, 'pressure': 1020.2045288085938, 'humidity': 41.48582458496094, 'gas_resistance': 68.66505432128906, 'gas_index': 5, 'status': 176}, <NULL>, <NULL>, <NULL>, <NULL>]
+
+
+DATA WITH BSEC
+
+SEQUENTIAL MODE TEST
+0
+{'sample_nr': 1, 'timestamp': 12740214443471, 'iaq': 25.0, 'iaq_accuracy': 0, 'temperature': 24.364578247070312, 'raw_temperature': 24.364578247070312, 'raw_pressure': 1020.1556396484375, 'humidity': 41.39725112915039, 'raw_humidity': 41.397274017333984, 'raw_gas': 9.444927215576172, 'static_iaq': 25.0, 'static_iaq_accuracy': 0, 'co2_equivalent': 500.0, 'co2_accuracy': 0, 'breath_voc_equivalent': 0.4999999403953552, 'breath_voc_accuracy': 0, 'comp_gas_value': 2.47519850730896, 'comp_gas_accuracy': 0, 'gas_percentage': 0.0, 'gas_percentage_accuracy': 0}
+
+PARALLEL MODE TEST
+0
+{'sample_nr': 2, 'timestamp': 12743225454773, 'iaq': 25.0, 'iaq_accuracy': 0, 'temperature': 18.0031681060791, 'raw_temperature': 24.43737030029297, 'raw_pressure': 1020.1453857421875, 'humidity': 41.61467742919922, 'raw_humidity': 41.42312240600586, 'raw_gas': 10.943010330200195, 'static_iaq': 25.0, 'static_iaq_accuracy': 0, 'co2_equivalent': 500.0, 'co2_accuracy': 0, 'breath_voc_equivalent': 0.4999999403953552, 'breath_voc_accuracy': 0, 'comp_gas_value': 2.4950873851776123, 'comp_gas_accuracy': 0, 'gas_percentage': 0.0, 'gas_percentage_accuracy': 0}
+
+FORCED MODE TEST
+0
+{'sample_nr': 3, 'timestamp': 12746229397158, 'iaq': 25.0, 'iaq_accuracy': 0, 'temperature': 17.285512924194336, 'raw_temperature': 23.74207878112793, 'raw_pressure': 1020.2064208984375, 'humidity': 41.56747817993164, 'raw_humidity': 41.35874938964844, 'raw_gas': 10.48354721069336, 'static_iaq': 25.0, 'static_iaq_accuracy': 0, 'co2_equivalent': 500.0, 'co2_accuracy': 0, 'breath_voc_equivalent': 0.4999999403953552, 'breath_voc_accuracy': 0, 'comp_gas_value': 2.502995014190674, 'comp_gas_accuracy': 0, 'gas_percentage': 0.0, 'gas_percentage_accuracy': 0}
+INITIALIZED BME68X
+VARIANT = BME688
+SET BME68X CONFIG
+SET HEATER CONFIG (FORCED MODE)
+SET HEATER CONFIG (FORCED MODE)
+320 100 100 100 200 200 200 320 320 320 
+5 2 10 30 5 5 5 5 5 5 
+SET HEATER CONFIG (PARALLEL MODE)
+320 100 100 100 200 200 200 320 320 320 
+5 2 10 30 5 5 5 5 5 5 
+SET HEATER CONFIG (SEQUENTIAL MODE)
+INITIALIZED BME68X
+VARIANT = BME688
+INITIALIZED BSEC
+BSEC VERSION: 2.0.6.1
+USING DEFAULT BSEC CONFIG
+bsec_rslt = 10
+320 100 100 100 200 200 200 320 320 320 
+5 2 10 30 5 5 5 5 5 5 
+SET HEATER CONFIG (SEQUENTIAL MODE)
+320 100 100 100 200 200 200 320 320 320 
+5 2 10 30 5 5 5 5 5 5 
+SET HEATER CONFIG (PARALLEL MODE)
+SET HEATER CONFIG (FORCED MODE)
