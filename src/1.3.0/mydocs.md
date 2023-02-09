@@ -147,13 +147,14 @@ Adjust your sleep() accordingly. </p>
     - sample_nr (int)
     - timestamp (int) in milliseconds
     - temperature (double) in degC
-    - pressure (double) in hPa (hecto Pascal)
+    - pressure (double) in Pa (Pascal)
     - humidity (double) in %rH (relative humidity)
     - gas_resistance (double) in kOhm (kilo Ohm)
     - status (int)
     
 `get_bsec_data()`
 - Measure data under current configuration and process it using BSEC
+- In BSEC 2.2.0.0 there are 13 Virtual Sensors, previous versions had 14 Virtual Sensors (BSEC_OUTPUT_COMPENSATED_GAS was removed by BOSCH SENSORTECH). See Table in section 1.2.4 of the Integration Guide for details.
 - Returns:
     - list of physical and virtual measurement values including IAQ, uses BSEC2.0 (in FORCED MODE)
     - array of lists of physical and virtual measurement values including IAQ, uses BSEC2.0 (in PARALLEL MODE or SEQUENTIAL MODE)
@@ -163,7 +164,7 @@ Adjust your sleep() accordingly. </p>
     - iaq_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
     - temperature (double) in degC, temperature processed by BSEC
     - raw_temperature (double) in degC, raw sensor output
-    - raw_pressure (double) in hPa (hecto Pascal), raw sensor output
+    - raw_pressure (double) in Pa (Pascal), raw sensor output
     - humidity (double) in %rH (relative humidity), humidity processed by BSEC
     - raw_humidity (double) in %rH (relative humidity), raw sensor output
     - raw_gas (double) in kOhm (kilo Ohm), raw sensor output
@@ -173,7 +174,7 @@ Adjust your sleep() accordingly. </p>
     - co2_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
     - breath_voc_equivalent (double) breath VOC concentration estimate in ppm (parts per million)
     - breath_voc_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
-    - comp_gas_value (double) in log_10(Ohm), temperature and humidity compensated gas resistance value, try 10^(comp_gas_value) to recieve value in Ohm
+    - comp_gas_value (double) in log_10(Ohm), temperature and humidity compensated gas resistance value, try 10^(comp_gas_value) to receive value in Ohm   Deprecated in BSEC 2.2.0.0 virtual sensor BSEC_OUTPUT_COMPENSATED_GAS removed.
     - comp_gas_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
     - gas_percentage (double) 
     - gas_percentage_accuracy (int) calibration status ranges from 0 (calibrating) to 3 (fully calibrated)
@@ -230,7 +231,7 @@ See get_bsec_state() and set_bsec_state() below, as the approach is similar but 
 
 <p> The config is typically produced by the Bosch AI studio, with up to 4 Classes defined.
 Each Class is based on training from sample data of a smell (meat, coffee, air, cheese, etc) and exported as a single config file.
-Default configs are provided in the BOSCH BSEC library 2.0.6.1, and the Pi3g code is set to import an appropriate config on initialisation. </p>
+Default configs are provided in the BOSCH BSEC 2 library, and the Pi3g code is set to import an appropriate config on initialisation. </p>
 
 `get_bsec_state()`
 - Args: none

@@ -20,6 +20,14 @@ And below shows inside a smaller box with only the BME688 sensor (and not the pm
 
 ![Box](bme688box.jpg)
 
+The oled screens require the following installs (as for the PM25 sensor). 
+
+```
+apt-get install python3-pil
+apt-get install libopenjp2-7
+pip3 install luma-oled
+```
+The pip program is not installed by default and the package is named python3-pip (apt install python3-pip), you may already have it installed.
 
 I am using PI Zero 2 boards and the heat from board, the PM2.5 sensor, and the battery, can have a significant impact on the BME688 Bosch sensor.  The pi3g board has the sensor on a protruding nose of the board, keeping it away from the heat in the box. The Adafruit and Pimoroni BME688 boards have the sensor centrally mounted on a module making it more  difficult to mount in a box such that the sensor is kept away from the heat of the system.   There is a temperature offset parameter in the code to allow for this effect, but you must calibrate against an accurate source (for example a local METAR station).
 
@@ -38,4 +46,4 @@ $ sudo systemctl stop bme-sensor-start
 
 The code will log to /var/log/bme.log
 
-Note: The startup script variable DAEMON assumes a path of /home/pi and you might need to change this as pi is no longer the default raspbian user. Also for the display to work a copy of the luma.examples fonts folder [luma.examples](https://github.com/rm-hull/luma.examples) is required. A copy of the font files only can be found in the PM25/fonts folder of this project. 
+Note: The startup script variable DAEMON assumes a path of /home/pi and you might need to change this as pi is no longer the default raspbian user. Also for display to work a copy of the luma.examples fonts folder [luma.examples](https://github.com/rm-hull/luma.examples) is recommended. A copy of the font files only can be found in the PM25/fonts folder of this project, put the fonts folder in /home/pi/ (change if pi is not your default user).
