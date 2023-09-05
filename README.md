@@ -7,5 +7,5 @@ The PM25 particulate matter sensor from Adafruit comes with I2C interface, in a 
 
 There are notes in each folder of what I was trying to do with these sensors. Both sensors have library dependencies which are explained in the notes, and I use PI Zero 2 boards with Raspbian Buster. I run raspbian os on various flavours of respberry pi, largely 32bit raspbian as that is what the Bosch Sensortec library supported, however Pi4 and 64bit raspbian is becoming more common and BOSCH have recently released a 64bit BSEC 2 library.   
 
-
+NOTE: bmerawdata.py does not record data in a format compatible with the current version of BME AI Studio. 
 
